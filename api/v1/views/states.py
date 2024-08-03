@@ -6,24 +6,29 @@ from api.v1.views import app_views
 from models import storage
 from flask import jsonify, abort, request
 
+
 @app_views.route("/states", methods=["GET"])
 def view_all_states():
-    """Retrieve the list of all State objects"""
+    """Method to view all states"""
     all_states = storage.all(State).values()
+
     states = [state.to_dict() for state in all_states]
     return jsonify(states)
 
+
 @app_views.route("/states/<state_id>", methods=["GET"])
 def view_single_state(state_id):
-    """Retrieve a State object by id"""
+    """View state by id"""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
+
     return jsonify(state.to_dict())
+
 
 @app_views.route("/states/<state_id>", methods=["DELETE"])
 def delete_state(state_id):
-    """Delete a State object by id"""
+    """Delete state base on its id"""
     state = storage.get(State, state_id)
     if state:
         storage.delete(state)
@@ -32,18 +37,19 @@ def delete_state(state_id):
     else:
         abort(404)
 
-@app_views.route("/states", methods=["POST"])
+
+@app_views.route("/states/", methods=["POST"])
 def post_a_state():
-    """Create a new State object"""
-    if not request.is_json:
-        abort(400, description="Not a JSON")
+    """Method to view all states"""
+    if not request.json:
+        return abort(400, "Not a JSON")
     arguments = request.get_json()
     if "name" not in arguments:
-        abort(400, description="Missing name")
+        return abort(400, "Missing name")
     state = State(**arguments)
-    storage.new(state)
-    storage.save()
-    return jsonify(state.to_dict()), 201
+    state.save()
+    return jsonify(state.to_dict()), 200
+
 
 @app_views.route("/states/<state_id>", methods=["PUT"])
 def update_single_state(state_id):
