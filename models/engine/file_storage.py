@@ -79,6 +79,7 @@ class FileStorage:
         for key in all_ojecdts:
             if key == '{}.{}'.format(cls.__name__, id):
                 return all_ojecdts[key]
+        return None
 
     def count(self, cls=None):
         """Count: Method to count all object in the storage
