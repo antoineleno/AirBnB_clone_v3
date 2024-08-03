@@ -54,7 +54,7 @@ def post_a_state():
 @app_views.route("/states/<state_id>", methods=["PUT"])
 def update_single_state(state_id):
     """Update a State object by id"""
-    if not request.get_json():
+    if not request.is_json:
         abort(400, description="Not a JSON")
 
     state = storage.get(State, state_id)
