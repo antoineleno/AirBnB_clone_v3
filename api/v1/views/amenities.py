@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""State module"""
+"""Ameneity module"""
 
 from models.state import State
 from models.amenity import Amenity
@@ -52,7 +52,7 @@ def post_an_amenity():
     return jsonify(amenity.to_dict()), 200
 
 
-@app_views.route("/amenities/<amenity_id", methods=["PUT"])
+@app_views.route("/amenities/<amenity_id>", methods=["PUT"])
 def update_single_amnity(amenity_id):
     """Update a State object by id"""
     if not request.is_json:
