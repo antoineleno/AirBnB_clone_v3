@@ -1,4 +1,5 @@
-
+#!/usr/bin/python3
+"""init module"""
 from flask import Blueprint
 
 
