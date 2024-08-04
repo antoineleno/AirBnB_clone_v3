@@ -8,7 +8,7 @@ from models import storage
 from flask import jsonify, abort, request
 
 
-@app_views.route("/cities/<city_id>/places", methods=["GET"], strict_slashes=False)
+@app_views.route("/cities/<city_id>/places", methods=["GET"])
 def view_all_places(city_id):
     """Method to view all places"""
     place = storage.get(Place, city_id)
@@ -17,7 +17,7 @@ def view_all_places(city_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route("/places/<place_id>", methods=["GET"], strict_slashes=False)
+@app_views.route("/places/<place_id>", methods=["GET"])
 def view_single_place(place_id):
     """View place by id"""
     place = storage.get(Place, place_id)
@@ -27,7 +27,7 @@ def view_single_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route("/places/<place_id>", methods=["DELETE"], strict_slashes=False)
+@app_views.route("/places/<place_id>", methods=["DELETE"])
 def delete_place(place_id):
     """Delete place base on its id"""
     place = storage.get(Place, place_id)
@@ -39,7 +39,7 @@ def delete_place(place_id):
         abort(404)
 
 
-@app_views.route("/cities/<city_id>/places", methods=["POST"], strict_slashes=False )
+@app_views.route("/cities/<city_id>/places", methods=["POST"])
 def post_a_place(city_id):
     """Method to to post a place"""
     city = storage.get(City, city_id)
@@ -58,7 +58,7 @@ def post_a_place(city_id):
     return jsonify(place.to_dict()), 200
 
 
-@app_views.route("/places/<place_id>", methods=["PUT"], strict_slashes=False)
+@app_views.route("/places/<place_id>", methods=["PUT"])
 def update_single_place(place_id):
     """Update a place object by id"""
     if not request.is_json:
