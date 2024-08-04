@@ -72,7 +72,7 @@ def update_single_place(place_id):
 
     for key, value in arguments.items():
         if key not in ["user_id", "city_id", "created_at", "updated_at"]:
-            setattr(City, key, value)
+            setattr(place, key, value)
 
     storage.save()
     return jsonify(place.to_dict()), 200
