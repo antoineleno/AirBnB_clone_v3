@@ -33,6 +33,6 @@ class User(BaseModel, Base):
                 hasher = hashlib.md5()
                 hasher.update(pwd.encode('utf-8'))
                 secured_password = hasher.hexdigest()
-                kwargs["password"]=secured_password
+                kwargs["password"] = secured_password
 
         super().__init__(*args, **kwargs)
